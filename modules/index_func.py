@@ -23,7 +23,6 @@ def get_documents(file_src):
         filename = os.path.basename(filepath)
         file_type = os.path.splitext(filename)[1]
         logging.info(f"loading file: {filename}")
-        texts = None
         try:
             if file_type == ".pdf":
                 logging.debug("Loading PDF...")
@@ -73,9 +72,8 @@ def get_documents(file_src):
             logging.error(f"Error loading file: {filename}")
             traceback.print_exc()
 
-        if texts is not None:
-            texts = text_splitter.split_documents(texts)
-            documents.extend(texts)
+        texts = text_splitter.split_documents(texts)
+        documents.extend(texts)
     logging.debug("Documents loaded.")
     return documents
 
@@ -105,9 +103,9 @@ def construct_index(
     index_name = get_file_hash(file_src)
     index_path = f"./index/{index_name}"
     if local_embedding:
-        from langchain.embeddings.huggingface import HuggingFaceEmbeddings
-        embeddings = HuggingFaceEmbeddings(
-            model_name="sentence-transformers/distiluse-base-multilingual-cased-v2")
+        from langchain.embeddings import HuggingFaceBgeEmbeddings
+        encode_kwargs = {'normalize_embeddings': True}  # set True to compute cosine similarity
+        embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-large-zh",encode_kwargs=encode_kwargs) #sentence-transformers/distiluse-base-multilingual-cased-v2
     else:
         from langchain.embeddings import OpenAIEmbeddings
         if os.environ.get("OPENAI_API_TYPE", "openai") == "openai":
@@ -122,9 +120,13 @@ def construct_index(
     else:
         try:
             documents = get_documents(file_src)
+            #print("documents:")
+            #print(documents)
             logging.info("构建索引中……")
             with retrieve_proxy():
                 index = FAISS.from_documents(documents, embeddings)
+            #print("index:")
+            #print(index)
             logging.debug("索引构建完成！")
             os.makedirs("./index", exist_ok=True)
             index.save_local(index_path)
