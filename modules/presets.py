@@ -4,7 +4,9 @@ from pathlib import Path
 import gradio as gr
 from .webui_locale import I18nAuto
 
-i18n = I18nAuto()  # internationalization
+#i18n = I18nAuto()  # internationalization
+def i18n(msg):
+    return msg
 
 CHATGLM_MODEL = None
 CHATGLM_TOKENIZER = None
