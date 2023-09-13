@@ -120,17 +120,23 @@ def construct_index(
     else:
         try:
             documents = get_documents(file_src)
-            #print("documents:")
-            #print(documents)
             logging.info("构建索引中……")
             with retrieve_proxy():
                 index = FAISS.from_documents(documents, embeddings)
-            #print("index:")
-            #print(index)
             logging.debug("索引构建完成！")
             os.makedirs("./index", exist_ok=True)
             index.save_local(index_path)
             logging.debug("索引已保存至本地!")
+
+            # 打印documents内容
+            logging.debug("documents:")
+            for doc in documents:
+                logging.debug(doc)
+
+            # 打印index内容
+            logging.debug("index:")
+            logging.debug(index)
+            
             return index
 
         except Exception as e:
