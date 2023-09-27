@@ -105,7 +105,7 @@ def construct_index(
     if local_embedding:
         from langchain.embeddings import HuggingFaceBgeEmbeddings
         encode_kwargs = {'normalize_embeddings': True}  # set True to compute cosine similarity
-        embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-large-zh",encode_kwargs=encode_kwargs) #sentence-transformers/distiluse-base-multilingual-cased-v2
+        embeddings = HuggingFaceBgeEmbeddings(model_name="BAAI/bge-large-zh-v1.5",encode_kwargs=encode_kwargs) #sentence-transformers/distiluse-base-multilingual-cased-v2
     else:
         from langchain.embeddings import OpenAIEmbeddings
         if os.environ.get("OPENAI_API_TYPE", "openai") == "openai":
@@ -136,7 +136,7 @@ def construct_index(
             # 打印index内容
             logging.debug("index:")
             logging.debug(index)
-            
+
             return index
 
         except Exception as e:
