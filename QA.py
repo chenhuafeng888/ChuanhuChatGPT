@@ -1,0 +1,29 @@
+import sys
+import pandas as pd
+from sentence_transformers import SentenceTransformer
+
+# 加载模型
+model_name = "BAAI/bge-large-zh-v1.5"
+model = SentenceTransformer(model_name)
+
+# 获取文件路径作为启动参数
+file_path = sys.argv[1]
+
+# 加载数据
+data = pd.read_excel(file_path)
+
+while True:
+    # 提示用户输入查询字符串
+    query = input("请输入查询字符串：")
+
+    # 计算查询字符串与每个问题的相似度
+    similarities = model.similarity(query, data["Q"])
+
+    # 找到最相似的问题对应的答案
+    max_similarity_index = similarities.argmax()
+    answer = data.loc[max_similarity_index, "A"]
+
+    # 打印答案
+    print("答案：", answer)
+
+#启动程序：python QA.py your_file.xlsx
