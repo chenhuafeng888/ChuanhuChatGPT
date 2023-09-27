@@ -17,7 +17,8 @@ while True:
     query = input("请输入查询字符串：")
 
     # 计算查询字符串与每个问题的相似度
-    similarities = model.similarity(query, data["Q"])
+    query_embedding = model.encode([query], normalize_embeddings=True)
+    similarities = query_embedding @ model.encode(data["Q"], normalize_embeddings=True).T
 
     # 找到最相似的问题对应的答案
     max_similarity_index = similarities.argmax()
