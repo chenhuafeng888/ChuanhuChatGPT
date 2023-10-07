@@ -1,3 +1,5 @@
+import sys
+import pandas as pd
 from transformers import AutoTokenizer, AutoModel
 
 # 获取模型名称和文件路径作为启动参数
@@ -27,4 +29,5 @@ while True:
     response, history = model.chat(tokenizer, document_text + "\n请根据上面内容，" + query, history=[])
     print(response)
 
+#!pip install protobuf transformers==4.30.2 cpm_kernels torch>=2.0 gradio mdtex2html sentencepiece accelerate
 #启动程序：python robot.py THUDM/chatglm2-6b-32k-int4 恶性肿瘤保险条款.txt
