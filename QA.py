@@ -27,6 +27,9 @@ while True:
 
     # 找到最相似的问题对应的答案
     max_similarity_index = similarities.argmax()
+    if max_similarity_index < 0.5:
+        print("不好意思，没有合适的答案")
+        continue
     answer = data.loc[max_similarity_index, "A"]
 
     # 打印答案
