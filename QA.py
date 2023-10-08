@@ -34,6 +34,7 @@ while True:
 
     # 打印答案
     #print(similarities)
+    print(max_similarity_index)
     print("答案：", answer)
 
 #启动程序：python QA.py BAAI/bge-large-zh-v1.5 QA.xlsx
