@@ -26,8 +26,8 @@ while True:
     # 提示用户输入查询字符串
     query = input("请输入查询字符串：")
 
-    response, history = model.chat(tokenizer, document_text + "\n请根据上面内容，" + query, history=[])
-    #response, history = model.chat(tokenizer, document_text + "\n你作为聊天机器人，只能根据上面内容回复，如果上面内容里找不到答案你就说：您的问题超出知识库范围。" + query, history=[])
+    #response, history = model.chat(tokenizer, document_text + "\n请根据上面内容，" + query, history=[])
+    response, history = model.chat(tokenizer, document_text + "\n你作为聊天机器人，只能根据上面内容回复，不要有大模型幻想的内容，如果上面内容里找不到答案你就说：您的问题超出知识库范围。" + query, history=[])
     print(response)
 
 #!pip install protobuf transformers==4.30.2 cpm_kernels torch>=2.0 gradio mdtex2html sentencepiece accelerate
