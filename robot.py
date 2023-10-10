@@ -33,7 +33,7 @@ while True:
     # response, history = model.chat(tokenizer, document_text + "\n你作为聊天机器人，只能根据上面内容回复，不要有大模型幻想的内容，也不要基于你自己的知识产生内容，如果上面内容里找不到答案你就说：您的问题超出知识库范围。" + query, history=[])
 
     print(response)
-    print("#######################################")
+    print("#######################################\n")
 
 #!pip install protobuf transformers==4.30.2 cpm_kernels torch>=2.0 gradio mdtex2html sentencepiece accelerate
 #启动程序：python robot.py THUDM/chatglm2-6b-32k-int4 恶性肿瘤保险条款.txt
