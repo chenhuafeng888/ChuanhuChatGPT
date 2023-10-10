@@ -12,7 +12,8 @@ if len(sys.argv) > 2:
     file_path = sys.argv[2]
 
 tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-model = AutoModel.from_pretrained(model_name, trust_remote_code=True).half().cuda()
+#model = AutoModel.from_pretrained(model_name, trust_remote_code=True).half().cuda()
+model = AutoModel.from_pretrained(model_name, trust_remote_code=True).cuda()
 model = model.eval()
 print("模型已加载：" + model_name)
 
