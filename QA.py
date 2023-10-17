@@ -27,14 +27,14 @@ while True:
 
     # 找到最相似的问题对应的答案
     max_similarity_index = similarities.argmax()
+    print(similarities)
+    print(similarities.max())
     if similarities.max() < 0.5:
         print("不好意思，没有合适的答案")
         continue
     answer = data.loc[max_similarity_index, "A"]
 
     # 打印答案
-    #print(similarities)
-    #print(max_similarity_index)
     print("答案：", answer)
 
 #启动程序：python QA.py BAAI/bge-large-zh-v1.5 QA.xlsx
