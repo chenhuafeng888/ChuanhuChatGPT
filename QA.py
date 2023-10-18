@@ -2,6 +2,7 @@ import sys
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 import argparse
+import numpy as np
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--model_name", default="BAAI/bge-large-zh-v1.5", help="模型名称")
