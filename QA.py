@@ -42,10 +42,9 @@ while True:
     print()
     if similarities.max() < threshold:
         print("作为机器人，我没充分理解你的问题，我给出3个可能性答案供您参考：")
-        # 获取最相关的前三个答案的索引
-        #max_similarity_indices = similarities.argsort()[-3:][::-1]
-        #max_similarity_indices = similarities.argsort()[-3:]
-        max_similarity_indices = np.argsort(similarities[0])[-3:]
+        # 获取最相关的前三个答案的索引: 取前3大，之后再倒过来排序使最大的是第一个（以此类推）
+        #similarities-> [[0.39948088 0.47452217 0.48097253 0.34293738 0.2999965  0.35529214 ...]]
+        max_similarity_indices = np.argsort(similarities[0])[-3:][::-1]
         print("max_similarity_indices")
         print(max_similarity_indices)
         for index in max_similarity_indices:
