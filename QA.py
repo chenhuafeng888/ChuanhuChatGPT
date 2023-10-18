@@ -50,6 +50,7 @@ while True:
         for index in max_similarity_indices:
             answer = data.loc[index, "A"]
             print(answer)
+            print("")
         print("如果你认为答案不在其中，请您再次提问：详细描述问题，包括问题背景、问题类型、问题作用、应用场景等等")
         continue
     answer = data.loc[max_similarity_index, "A"]
