@@ -21,6 +21,9 @@ model = SentenceTransformer(model_name)
 data = pd.read_excel(file_path)
 
 while True:
+    print("")
+    print("-----------------------------------------------------------")
+
     # 提示用户输入查询字符串
     query = input("请输入查询字符串：")
 
@@ -38,7 +41,9 @@ while True:
     print()
     if similarities.max() < threshold:
         print("作为机器人，我没充分理解你的问题，我给出3个可能性答案供您参考：")
-        max_similarity_indices = similarities.argsort()[-3:][::-1]  # 获取最相关的前三个答案的索引
+        # 获取最相关的前三个答案的索引
+        #max_similarity_indices = similarities.argsort()[-3:][::-1]
+        max_similarity_indices = similarities.argsort()[-3:]
         for index in max_similarity_indices:
             answer = data.loc[index, "A"]
             print(answer)
@@ -49,4 +54,4 @@ while True:
     # 打印答案
     print("答案：", answer)
 
-#启动程序：python QA.py --mode_name BAAI/bge-large-zh-v1.5 QA.xlsx --file_path QA.xlsx __threshold 0.7
+#启动程序：python QA.py --model_name BAAI/bge-large-zh-v1.5 --file_path QA.xlsx --threshold 0.7
