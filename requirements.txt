@@ -28,3 +28,4 @@ tabulate
 ujson
 python-docx
 websocket_client
+mdtex2html
