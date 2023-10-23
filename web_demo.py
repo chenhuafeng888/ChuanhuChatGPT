@@ -83,9 +83,8 @@ with gr.Blocks() as demo:
                 user_input = gr.Textbox(show_label=False, placeholder="问题输入...", lines=2).style(
                     container=False)
             with gr.Column(min_width=32, scale=1):
-                submitBtn = gr.Button("提交", variant="primary")
-        with gr.Column(scale=1):
-            emptyBtn = gr.Button("清空历史")
+                submitBtn = gr.Button("提交问题", variant="primary")
+                emptyBtn = gr.Button("清空历史")
 
     history = gr.State([])
     past_key_values = gr.State(None)
