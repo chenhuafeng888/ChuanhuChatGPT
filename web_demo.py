@@ -74,21 +74,18 @@ def reset_state():
 
 
 with gr.Blocks() as demo:
-    gr.HTML("""<h1 align="center">ChatGLM2-6B</h1>""")
+    gr.HTML("""<h1 align="center">大地保险机器人</h1>""")
 
     chatbot = gr.Chatbot()
     with gr.Row():
         with gr.Column(scale=4):
             with gr.Column(scale=12):
-                user_input = gr.Textbox(show_label=False, placeholder="Input...", lines=10).style(
+                user_input = gr.Textbox(show_label=False, placeholder="问题输入...", lines=2).style(
                     container=False)
             with gr.Column(min_width=32, scale=1):
-                submitBtn = gr.Button("Submit", variant="primary")
+                submitBtn = gr.Button("提交", variant="primary")
         with gr.Column(scale=1):
-            emptyBtn = gr.Button("Clear History")
-            max_length = gr.Slider(0, 32768, value=8192, step=1.0, label="Maximum length", interactive=True)
-            top_p = gr.Slider(0, 1, value=0.8, step=0.01, label="Top P", interactive=True)
-            temperature = gr.Slider(0, 1, value=0.95, step=0.01, label="Temperature", interactive=True)
+            emptyBtn = gr.Button("清空历史")
 
     history = gr.State([])
     past_key_values = gr.State(None)
