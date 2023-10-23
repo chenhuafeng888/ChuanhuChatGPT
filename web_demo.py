@@ -82,7 +82,8 @@ with gr.Blocks() as demo:
             with gr.Column(scale=12):
                 user_input = gr.Textbox(show_label=False, placeholder="问题输入...", lines=2).style(
                     container=False)
-            with gr.Column(min_width=32, scale=1):
+            #with gr.Column(min_width=32, scale=1):
+            with gr.Row():
                 submitBtn = gr.Button("提交问题", variant="primary")
                 emptyBtn = gr.Button("清空历史")
 
