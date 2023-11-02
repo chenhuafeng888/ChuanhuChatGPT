@@ -76,6 +76,10 @@ def parse_text(text):
 def answer_question(query):
     ret = ""
 
+    print("")
+    print("-----------------------------------------------------------")
+    print(query)
+
     # 计算查询字符串与每个问题的相似度
     query_embedding = model.encode([query], normalize_embeddings=True)
     similarities = query_embedding @ model.encode(data["Q"], normalize_embeddings=True).T
@@ -91,9 +95,11 @@ def answer_question(query):
             answer = data.loc[index, "A"]
             ret = ret + answer + "\n"
         ret = ret + "如果你认为答案不在其中，请您再次提问：详细描述问题，包括问题背景、问题类型、问题作用、应用场景等等" + "\n"
+        print(ret)
         return ret
     answer = data.loc[max_similarity_index, "A"]
     ret = ret + answer + "\n"
+    print(ret)
     return ret
 
 def predict(input, chatbot):
@@ -135,3 +141,6 @@ with gr.Blocks() as demo:
     emptyBtn.click(reset_state, outputs=[chatbot, history, past_key_values], show_progress=True)
 
 demo.queue().launch(share=True, inbrowser=True)
+
+# QA.xlsx 文件里需要有“Q”列、“A”列
+#启动程序：python web_demo.py --model_name BAAI/bge-large-zh-v1.5 --file_path QA.xlsx --threshold 0.7
